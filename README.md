@@ -16,8 +16,7 @@ La aplicación se desarrolló en base a los siguientes tres incisos:
 
 1) #### Crear un diagrama de entidad de relación para un módulo de compras, ventas, bodegas e inventario:
 
-
-![](https://i.imgur.com/jHS5Lkc.png)
+![](https://i.imgur.com/qzEwEdT.png)
 
 2) #### Crear un CRUD para el proceso de inventario dentro de una bodega:
 
