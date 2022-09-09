@@ -12,7 +12,7 @@ La aplicación está desarrollada con ayuda de las siguientes tecnologias:
 |Bootstrap | v5.2.1 |
 |app.diagrams.net | v20.3.0 |
 
-La aplicación se desarrolló en base a los siguientes tres insisos:
+La aplicación se desarrolló en base a los siguientes tres incisos:
 
 1) #### Crear un diagrama de entidad de relación para un módulo de compras, ventas, bodegas e inventario:
 
