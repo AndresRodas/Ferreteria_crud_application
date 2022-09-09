@@ -1,0 +1,33 @@
+{% extends "./template.html" %}
+
+{% block title %}Kardex{% endblock %}
+{% block body %}
+<div class="mb-5 mt-5 text-white">
+    <h2>Registros (ingresos/salidas)</h2>
+    <div class="table-responsive py-2">
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>ID</th>
+                    <th>Fecha Ocurrencia</th>
+                    <th>Tipo Transacción</th>
+                    <th>Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for kar in kardex %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ kar.id_registro }}</td>
+                    <td>{{ kar.fecha_ocurrencia }}</td>
+                    <td>{{ kar.tipo_transaccion }}</td>
+                    <td>{{ kar.detalle }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

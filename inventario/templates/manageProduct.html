@@ -1,0 +1,137 @@
+{% extends "./template.html" %}
+
+{% block title %}Productos{% endblock %}
+{% block body %}
+
+<div class="row mt-5">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-5">
+        <h2>Ingreso de Producto</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/addProduct/" method="POST" id="formProduct">{% csrf_token %}
+                    <div class="form-group mb-2">
+                        <select class="form-control" form="formProduct" id="idBodega" name="idBodega"
+                            aria-label="Default select example">
+                            {% for bodega in bodegas %}
+                            <option value="{{bodega.id_bodega}}">{{bodega.nombre_bodega}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="txtName" name="txtName" class="form-control" placeholder="Nombre"
+                            maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <select class="form-control" form="formProduct" id="txtTipo" name="txtTipo"
+                            aria-label="Default select example">
+                            <option selected value="Producto">Producto</option>
+                            <option value="Servicio">Servicio</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="txtMarca" name="txtMarca" class="form-control" placeholder="Marca"
+                            maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="date" id="txtFecha" name="txtFecha" class="form-control" placeholder="Vencimiento"
+                            required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-success btn-block text-white"> Guardar </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-5">
+        <h2>Ingreso de Embalaje</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/addEmb/" method="POST" id="formProduct">{% csrf_token %}
+                    <div class="form-group mb-2">
+                        <input type="text" id="id_prod" name="id_prod" class="form-control"
+                            placeholder="ID del producto" maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="tipo_emb" name="tipo_emb" class="form-control" placeholder="Embalaje"
+                            maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="proporcion" name="proporcion" class="form-control"
+                            placeholder="Proporcion de unidades" maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="existencias" name="existencias" class="form-control"
+                            placeholder="Existencias" maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="precio_venta" name="precio_venta" class="form-control"
+                            placeholder="Precio de venta" maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="precio_compra" name="precio_compra" class="form-control"
+                            placeholder="Precio de compra" maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-success btn-block text-white"> Guardar </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="mb-5">
+        <h2>Productos</h2>
+        <div class="table-responsive py-2">
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>ID</th>
+                        <th>Bodega</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Marca</th>
+                        <th>Vencimiento</th>
+                        <th>Embalaje y Precios</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.id_producto }}</td>
+                        <td>{{ product.id_bodega.nombre_bodega }}</td>
+                        <td>{{ product.nombre_producto }}</td>
+                        <td>{{ product.tipo_producto }}</td>
+                        <td>{{ product.marca_producto }}</td>
+                        <td>{{ product.fecha_vencimiento }}</td>
+                        <td>
+                            <div class="form-group mb-2">
+                                <select class="form-control" form="formProduct" id="txtTipo" name="txtTipo"
+                                    aria-label="Default select example">
+                                    {% for embalaje in embalajes %}
+
+                                    {% if product.id_producto == embalaje.id_producto.id_producto %}
+                                    <option value="Producto">
+                                        {{embalaje.existencias}} {{embalaje.tipo_embalaje}} a Q{{embalaje.precio_venta}}
+                                        c/u
+                                    </option>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </td>
+                        <td><a href="editProduct/{{product.id_producto}}" class="btn btn-warning">Cambio</a></td>
+                        <td><a href="deleteProduct/{{product.id_producto}}" class="btn btn-danger">Salida</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

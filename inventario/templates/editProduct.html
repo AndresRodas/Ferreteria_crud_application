@@ -1,0 +1,51 @@
+{% extends "./template.html" %}
+
+{% block title %}Edición de Producto{% endblock %}
+
+{% block body %}
+
+<div class="row mt-5">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edición de Producto</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/updateProduct/" method="POST" id="formProduct">{% csrf_token %}
+                    <div class="form-group mb-2">
+                        <input type="text" id="txtId" value="{{product.id_producto}}" name="txtId" class="form-control" readonly
+                            maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <select class="form-control" form="formProduct" id="idBodega" name="idBodega" aria-label="Default select example">
+                            {% for bodega in bodegas %}
+                            <option value="{{bodega.id_bodega}}">{{bodega.nombre_bodega}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="txtName" value="{{product.nombre_producto}}" name="txtName" class="form-control" placeholder="Producto"
+                            maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <select class="form-control" form="formProduct" id="txtTipo" name="txtTipo" aria-label="Default select example">
+                            <option selected value="Producto" >Producto</option>
+                            <option value="Servicio">Servicio</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="text" id="txtMarca" value="{{product.marca_producto}}" name="txtMarca" class="form-control" placeholder="Marca"
+                            maxlength="20" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="date" id="txtFecha" value="{{product.fecha_vencimiento}}" name="txtFecha" class="form-control"
+                            required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-success btn-block text-white"> Guardar </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
